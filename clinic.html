@@ -1,0 +1,379 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลินิก</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+    
+    <!-- W3 CSS template -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <style>
+    #mapid {
+    height: 800px;
+    }
+    </style>
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Prompt", sans-serif}
+        .w3-bar,h1,button {font-family: "Prompt", sans-serif}
+        .fa-anchor,.fa-coffee {font-size:200px}
+        </style>
+</head>
+<body>
+    <!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-teal w3-card w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-white">หน้าแรก</a>
+      <a href="linkrat1.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">โรงพยาบาลรัฐบาล</a>
+      <a href="linkake1.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">โรงพยาบาลเอกชน</a>
+      <a href="clinic.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">คลินิก</a>
+      <a href="aboutme.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">เกี่ยวกับเรา</a>
+    </div>
+
+    
+    
+    <div class="w3-row">
+        <div id="mapid" class="w3-half"></div>
+        <div id="content" class="w3-half">
+        <table class="w3-table w3-striped">
+        <tr>
+        <th>ชื่อคลินิก</th>
+        <th>เบอร์ติดต่อ</th>
+        </tr>
+        <tr>
+        <td>น้ำตก A</td>
+        <td>ธรรมชาติ</td>
+        </tr>
+        </table>
+        </div>
+        </div>
+<script>
+    var map = L.map("mapid").setView([13.71085071833161, 100.39853603510807], 14);
+ 
+ var osm = L.tileLayer(
+ "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+ ).addTo(map);
+ var gsat = L.tileLayer(
+ "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+ ).addTo(map);
+ var OpenStreetMap_HOT = L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png").addTo(map);
+ 
+ var baseMaps = {
+ OSM: osm,
+GoogleSat: gsat,
+StreetMap_HOT: OpenStreetMap_HOT,
+ };
+ 
+ var nonthaburi = 
+  {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "นวเกษมคลินิก บางแค",
+        "ประเภท": "084 128 4520"
+      },
+      "geometry": {
+        "coordinates": [
+          100.40127261462169,
+          13.710432921710535
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "ไพศาล คลินิกเวชกรรม",
+        "ประเภท": "02 454 1534"
+      },
+      "geometry": {
+        "coordinates": [
+          100.40073631069401,
+          13.709939999797669
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "ศูนย์บริการสาธารณสุข 40 บางแค",
+        "ประเภท": "02 455 3870"
+      },
+      "geometry": {
+        "coordinates": [
+          100.40034667579152,
+          13.710497479688271
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "สุรพลการแพทย์",
+        "ประเภท": "02 455 3172"
+      },
+      "geometry": {
+        "coordinates": [
+          100.39557755105028,
+          13.710792586927113
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "ศศิรักษ์คลินิกเวชกรรม",
+        "ประเภท": "02 100 4980"
+      },
+      "geometry": {
+        "coordinates": [
+          100.38805146240855,
+          13.709301907647955
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "คลินิกเวชกรรม ไอเอ็มเอช เพชรเกษม 65",
+        "ประเภท": "02 403 8575"
+      },
+      "geometry": {
+        "coordinates": [
+          100.38373524545796,
+          13.708466594908828
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "วิโรจน์ คลินิก",
+        "ประเภท": "02 806 9921"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37476304970653,
+          13.72469217754221
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "บางแคคลินิกกายภาพบำบัด",
+        "ประเภท": "02 421 5473"
+      },
+      "geometry": {
+        "coordinates": [
+          100.38157368183715,
+          13.708855124180104
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "ไร่ขิงจักษุคลินิก",
+        "ประเภท": "02 809 4504"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37824574892738,
+          13.708064222345769
+        ],
+        "type": "Point"
+      },
+      "id": 8
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "คลินิกเวชกรรมตลาดม.เศรษฐกิจ",
+        "ประเภท": "02 403 1783"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37797672274678,
+          13.711189644247455
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "มิตรไมตรีคลินิกเวชกรรม สาขา ม. เศรษฐกิจ",
+        "ประเภท": "065 940 3162"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37789601153781,
+          13.713772978493665
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "มาร์คลินิกการแพทย์แผนไทยประยุกต์",
+        "ประเภท": "094 169 0142"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37321354370243,
+          13.718830563109037
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "คลินิกวุฒิแพทย์",
+        "ประเภท": "02 421 1413"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37751606786651,
+          13.718393050319548
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "คลินิก แพทย์สานไผ่",
+        "ประเภท": "02 808 0931"
+      },
+      "geometry": {
+        "coordinates": [
+          100.37784700391404,
+          13.718224383830659
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "พงศ์ศักดิ์คลินิกเวชกรรม",
+        "ประเภท": "098 539 5191"
+      },
+      "geometry": {
+        "coordinates": [
+          100.41659695116567,
+          13.711736502656777
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "หมอเชาว์",
+        "ประเภท": "02 454 3303"
+      },
+      "geometry": {
+        "coordinates": [
+          100.42101419180244,
+          13.711575782405319
+        ],
+        "type": "Point"
+      },
+      "id": 15
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "คลินิกวิชัยการแพทย์",
+        "ประเภท": "02 413 0652"
+      },
+      "geometry": {
+        "coordinates": [
+          100.42086685206738,
+          13.711027572796354
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ชื่อแหล่งท่องเที่ยว": "พรชัยคลินิกเวชกรรม",
+        "ประเภท": "083 295 9574"
+      },
+      "geometry": {
+        "coordinates": [
+          100.3898751647883,
+          13.74536527329839
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
+  // interaction by mouseover
+  var tourLayer = L.geoJSON(nonthaburi, {
+ pointToLayer: function (feature, latlng) {
+ return L.marker(latlng).bindPopup(feature.properties.ชื่อแหล่งท่องเที่ยว);
+ },
+ onEachFeature: function (feature, layer) {
+ layer.on("mouseover", function () {
+ document
+ .getElementById(feature.properties.ชื่อแหล่งท่องเที่ยว)
+ .classList.add("w3-red");
+ });
+ 
+ layer.on("mouseout", function () {
+ document
+ .getElementById(feature.properties.ชื่อแหล่งท่องเที่ยว)
+ .classList.remove("w3-red");
+ });
+ },
+ }).addTo(map);
+ 
+ var cont = "";
+ cont += "<table class='w3-table w3-striped'>";
+ cont += "<tr>";
+ cont += "<th>ชื่อคลินิก</th>";
+ cont += "<th>เบอร์ติดต่อ</th>";
+ cont += "</tr>";
+ for (let i in nonthaburi.features) {
+ cont += "<tr id=" + nonthaburi.features[i].properties.ชื่อแหล่งท่องเที่ยว + ">";
+ cont += "<td>" + nonthaburi.features[i].properties.ชื่อแหล่งท่องเที่ยว + "</td>";
+ cont += "<td>" + nonthaburi.features[i].properties.ประเภท + "</td>";
+ cont += "</tr>";
+ }
+ cont += "</table>";
+ console.log(cont);
+ document.getElementById("content").innerHTML = cont;
+
+ var overlays = {Clinic: tourLayer};
+ //add leyer control
+ L.control.layers(baseMaps, overlays).addTo(map);
+</script>
+
+
+
+
+</body>
+</html>
